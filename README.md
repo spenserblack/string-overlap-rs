@@ -1,5 +1,7 @@
 # string-overlap
 
+[![Crates.io](https://img.shields.io/crates/v/string-overlap)](https://crates.io/crates/string-overlap)
+![Crates.io](https://img.shields.io/crates/d/string-overlap)
 [![Build Status](https://travis-ci.com/spenserblack/string-overlap-rs.svg?branch=master)](https://travis-ci.com/spenserblack/string-overlap-rs)
 
 A helper crate for "layering" ASCII art
