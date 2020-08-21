@@ -6,7 +6,7 @@ A helper crate for "layering" ASCII art
 
 ## Example
 
-*The below mirrors [this example](https://github.com/spenserblack/string-overlap-rs/blob/master/examples/overlap.rs).*
+*The below mirrors [`cargo run --example overlap`](https://github.com/spenserblack/string-overlap-rs/blob/master/examples/overlap.rs).*
 
 ### Input
 
