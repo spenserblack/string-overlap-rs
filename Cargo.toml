@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["string", "ascii", "overlap", "layer"]
 categories = []
 repository = "https://github.com/spenserblack/string-overlap-rs"
-publish = false # You should at least look at this file before you publish
 
 [dependencies]
 itertools = "0.9"
