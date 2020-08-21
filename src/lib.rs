@@ -51,7 +51,7 @@ where
                     let combined_line: String = b_chars
                         .zip_longest(f_chars)
                         .map(|chars| match chars {
-                            Both(b_char, ' ') => b_char,
+                            Both(b_char, f_char) if f_char.is_whitespace() => b_char,
                             Both(_, f_char) => f_char,
                             Left(b_char) => b_char,
                             Right(f_char) => f_char,
