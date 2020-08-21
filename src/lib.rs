@@ -10,7 +10,7 @@ pub fn overlap<B, F>(background: B, foreground: F) -> String where B: Display, F
     let foreground = foreground.lines();
 
     background.zip_longest(foreground).map(|lines| {
-        match lines {
+        let combined_line: String = match lines {
             Both(b_line, f_line) => {
                 let b_chars = b_line.chars();
                 let f_chars = f_line.chars();
@@ -34,7 +34,8 @@ pub fn overlap<B, F>(background: B, foreground: F) -> String where B: Display, F
             Right(f_line) => {
                 f_line.to_string()
             }
-        }
+        };
+        format!("{}\n", combined_line)
     }).collect()
 
 }
