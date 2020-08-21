@@ -1,8 +1,35 @@
+//! Overlap text.
+//!
+//! For overlapping purposes, whitespace characters in the foreground are
+//! treated as "invisible," and the character from the background will be
+//! used instead.
+//!
+//! *__NOTE__ Final newlines are inserted.*
+//!
+//! # Example
+//!
+//! ```rust
+//! use string_overlap::overlap;
+//!
+//! let background = "\
+//! ...
+//! ...
+//! ...";
+//! let foreground = "\
+//! foo
+//!   o
+//!   f";
+//!
+//! assert_eq!(overlap(background, foreground), "\
+//! foo
+//! ..o
+//! ..f\n");
+//! ```
 use itertools::Itertools;
 use itertools::EitherOrBoth::{Both, Left, Right};
 use std::fmt::Display;
 
-// NOTE Make &B and &F?
+/// Places `foreground` "on top of" `background`.
 pub fn overlap<B, F>(background: B, foreground: F) -> String where B: Display, F: Display {
     let background = background.to_string();
     let foreground = foreground.to_string();
