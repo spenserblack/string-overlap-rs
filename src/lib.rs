@@ -6,6 +6,7 @@ pub fn overlap<B, F>(background: B, foreground: F) -> String where B: Display, F
 
 #[cfg(test)]
 mod tests {
+    use pretty_assertions::assert_eq;
     use super::overlap;
 
     #[test]
