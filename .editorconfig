@@ -10,3 +10,6 @@ insert_final_newline = true
 
 [*.md]
 indent_size = 2
+
+[*.ascii]
+trim_trailing_whitespace = false
