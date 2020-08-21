@@ -19,8 +19,8 @@ pub fn overlap<B, F>(background: B, foreground: F) -> String where B: Display, F
                     .zip_longest(f_chars)
                     .map(|chars| {
                         match chars {
-                            Both(' ', f_char) => f_char,
-                            Both(b_char, _) => b_char,
+                            Both(b_char, ' ') => b_char,
+                            Both(_, f_char) => f_char,
                             Left(b_char) => b_char,
                             Right(f_char) => f_char,
                         }
