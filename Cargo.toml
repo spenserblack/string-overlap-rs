@@ -9,6 +9,12 @@ readme = "README.md"
 keywords = ["string", "ascii", "overlap", "layer"]
 categories = []
 repository = "https://github.com/spenserblack/string-overlap-rs"
+exclude = [
+    ".github/*",
+    ".editorconfig",
+    ".gitignore",
+    ".travis.yml",
+]
 
 [dependencies]
 itertools = "0.9"
