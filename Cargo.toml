@@ -16,8 +16,18 @@ exclude = [
     ".travis.yml",
 ]
 
+[features]
+default = ["colored"]
+colored = ["colored-crate"]
+
 [dependencies]
 itertools = "0.9"
 
+[dependencies.colored-crate]
+version = ">= 1.9.2, <= 2"
+package = "colored"
+optional = true
+
 [dev-dependencies]
+indoc = "1"
 pretty_assertions = "0.6"

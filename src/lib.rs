@@ -25,6 +25,9 @@
 //! ..o
 //! ..f\n");
 //! ```
+#[cfg(feature = "colored")]
+use colored_crate::ColoredString;
+
 use itertools::EitherOrBoth::{Both, Left, Right};
 use itertools::Itertools;
 use std::fmt::Display;
@@ -65,4 +68,9 @@ where
             format!("{}\n", combined_line)
         })
         .collect()
+}
+
+#[cfg(feature = "colored")]
+pub fn overlap_colored(_background: ColoredString, _foreground: ColoredString) -> ColoredString {
+    "".into()
 }
