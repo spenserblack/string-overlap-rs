@@ -25,6 +25,16 @@
 //! ..o
 //! ..f\n");
 //! ```
+//!
+//! # Features
+//!
+//! ## Default
+//!
+//! ### `colored`
+//!
+//! Allows overlapping of `ColoredString`s from the [colored] crate.
+//!
+//! [colored]: https://crates.io/crates/colored
 #[cfg(feature = "colored")]
 use colored_crate::ColoredString;
 
@@ -70,6 +80,34 @@ where
         .collect()
 }
 
+/// Overlap `ColoredString`s.
+///
+/// # Example
+///
+/// ```rust
+/// # extern crate colored_crate as colored;
+/// use colored::Colorize;
+/// use string_overlap::overlap_colored;
+///
+/// let background = "\
+/// ...
+/// ...
+/// ...".red();
+/// let foreground = "\
+/// foo
+///   o
+///   f".blue();
+///
+/// assert_eq!(
+///     overlap_colored(background, foreground),
+///     format!(
+///         "{line1}\n{line2}\n{line3}\n",
+///         line1="foo".blue(),
+///         line2=format!("{}{}", "..".red(), "o".blue()),
+///         line3=format!("{}{}", "..".red(), "f".blue()),
+///     ),
+/// );
+/// ```
 #[cfg(feature = "colored")]
 pub fn overlap_colored(background: ColoredString, foreground: ColoredString) -> String {
     use colored_crate::Colorize;
