@@ -18,10 +18,13 @@ exclude = [
 
 [features]
 default = ["colored"]
-colored = ["colored-crate"]
+colored = ["colored-crate", "lazy_static", "regex"]
 
 [dependencies]
 itertools = "0.9"
+lazy_static = { version = "1", optional = true }
+regex = { version = "1", optional = true }
+
 
 [dependencies.colored-crate]
 version = ">= 1.9.2, <= 2"

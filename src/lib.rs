@@ -71,6 +71,106 @@ where
 }
 
 #[cfg(feature = "colored")]
-pub fn overlap_colored(_background: ColoredString, _foreground: ColoredString) -> ColoredString {
-    "".into()
+pub fn overlap_colored(background: ColoredString, foreground: ColoredString) -> String {
+    use colored_crate::Colorize;
+    use lazy_static::lazy_static;
+    use regex::Regex;
+
+    lazy_static! {
+        static ref NOT_WHITESPACE: Regex = Regex::new(r"[^\s]+").unwrap();
+    }
+
+    let background_bg = background.bgcolor();
+    let background_fg = background.fgcolor();
+    let _background_style = background.style();
+    let foreground_bg = foreground.bgcolor();
+    let foreground_fg = foreground.fgcolor();
+    let _foreground_style = foreground.style();
+
+    let background = background.lines();
+    let foreground = foreground.lines();
+
+    background
+        .zip_longest(foreground)
+        .map(|lines| {
+            let combined_line: String = match lines {
+                Both(b_line, f_line) => {
+                    let fg_matches = NOT_WHITESPACE.find_iter(f_line);
+
+                    let mut background_left_boundary = 0;
+                    let mut line = String::new();
+
+                    for m in fg_matches {
+                        let b_left = b_line.get(background_left_boundary..m.start());
+                        background_left_boundary = m.end();
+                        match b_left {
+                            Some(s) => {
+                                let s = match background_fg {
+                                    Some(color) => s.color(color),
+                                    None => s.into(),
+                                };
+                                let s = match background_bg {
+                                    Some(color) => s.on_color(color),
+                                    None => s,
+                                };
+                                line.push_str(&s.to_string());
+                            }
+                            None => {}
+                        }
+                        let fg = m.as_str();
+                        let fg = match foreground_fg {
+                            Some(color) => fg.color(color),
+                            None => fg.into(),
+                        };
+                        let fg = match foreground_bg {
+                            Some(color) => fg.on_color(color),
+                            None => fg,
+                        };
+                        line.push_str(&fg.to_string());
+                    }
+
+                    let final_part = b_line.get(background_left_boundary..);
+                    match final_part {
+                        Some(s) => {
+                            let s = match background_fg {
+                                Some(color) => s.color(color),
+                                None => s.into(),
+                            };
+                            let s = match background_bg {
+                                Some(color) => s.on_color(color),
+                                None => s,
+                            };
+                            line.push_str(&s.to_string());
+                        }
+                        None => {}
+                    }
+                    line.push('\n');
+                    line
+                }
+                Left(b_line) => {
+                    let b_line = match background_fg {
+                        Some(color) => b_line.color(color),
+                        None => b_line.into(),
+                    };
+                    let b_line = match background_bg {
+                        Some(color) => b_line.on_color(color),
+                        None => b_line,
+                    };
+                    b_line.to_string()
+                }
+                Right(f_line) => {
+                    let f_line = match foreground_fg {
+                        Some(color) => f_line.color(color),
+                        None => f_line.into(),
+                    };
+                    let f_line = match foreground_bg {
+                        Some(color) => f_line.on_color(color),
+                        None => f_line,
+                    };
+                    f_line.to_string()
+                }
+            };
+            combined_line
+        })
+        .collect()
 }
