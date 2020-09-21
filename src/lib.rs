@@ -105,15 +105,17 @@ pub fn overlap_colored(background: ColoredString, foreground: ColoredString) -> 
                         background_left_boundary = m.end();
                         match b_left {
                             Some(s) => {
-                                let s = match background_fg {
-                                    Some(color) => s.color(color),
-                                    None => s.into(),
-                                };
-                                let s = match background_bg {
-                                    Some(color) => s.on_color(color),
-                                    None => s,
-                                };
-                                line.push_str(&s.to_string());
+                                if s.len() > 0 {
+                                    let s = match background_fg {
+                                        Some(color) => s.color(color),
+                                        None => s.into(),
+                                    };
+                                    let s = match background_bg {
+                                        Some(color) => s.on_color(color),
+                                        None => s,
+                                    };
+                                    line.push_str(&s.to_string());
+                                }
                             }
                             None => {}
                         }
@@ -132,15 +134,17 @@ pub fn overlap_colored(background: ColoredString, foreground: ColoredString) -> 
                     let final_part = b_line.get(background_left_boundary..);
                     match final_part {
                         Some(s) => {
-                            let s = match background_fg {
-                                Some(color) => s.color(color),
-                                None => s.into(),
-                            };
-                            let s = match background_bg {
-                                Some(color) => s.on_color(color),
-                                None => s,
-                            };
-                            line.push_str(&s.to_string());
+                            if s.len() > 0 {
+                                let s = match background_fg {
+                                    Some(color) => s.color(color),
+                                    None => s.into(),
+                                };
+                                let s = match background_bg {
+                                    Some(color) => s.on_color(color),
+                                    None => s,
+                                };
+                                line.push_str(&s.to_string());
+                            }
                         }
                         None => {}
                     }
