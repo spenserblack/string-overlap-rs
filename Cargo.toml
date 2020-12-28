@@ -22,7 +22,7 @@ default = ["colored"]
 colored = ["colored-crate", "lazy_static", "regex"]
 
 [dependencies]
-itertools = "0.9"
+itertools = ">=0.2.1"
 lazy_static = { version = "1", optional = true }
 regex = { version = "1", optional = true }
 
