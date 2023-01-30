@@ -33,7 +33,7 @@ package = "colored"
 optional = true
 
 [dev-dependencies]
-indoc = "1"
+indoc = "2"
 pretty_assertions = "1.0"
 
 [[example]]
